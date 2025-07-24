@@ -1,4 +1,4 @@
-# Swipe Anti-AFK
+# Anti-AFK
 
 Swipe Anti-AFK is a FiveM script designed to automatically detect and kick players who are AFK (away from keyboard) for too long. It helps keep your server active by removing idle players and notifying your Discord server when someone is kicked for being AFK.
 
