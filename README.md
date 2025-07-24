@@ -38,7 +38,6 @@ To enable debug mode for testing, uncomment the debug lines in `config.lua`.
 
 ## Credits
 - Script by Swipe
-- ASCII art and enhancements by Fanta
 
 ## License
 This script is provided as-is. Use at your own risk.
