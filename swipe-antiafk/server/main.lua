@@ -38,9 +38,14 @@ AddEventHandler('antiafk:kick', function()
     -- Get player identifiers
     local identifiers = {}
     for i = 0, GetNumPlayerIdentifiers(src) - 1 do
-        table.insert(identifiers, GetPlayerIdentifier(src, i))
+        local id = GetPlayerIdentifier(src, i)
+        if id and not id:find("ip:") then
+            table.insert(identifiers, id)
+        end
     end
     local identifierStr = table.concat(identifiers, ', ')
+
+    -- Only use FiveM player name for now
 
     -- Try to get player location (if using OneSync)
     local coords = "N/A"
@@ -56,7 +61,14 @@ AddEventHandler('antiafk:kick', function()
     DropPlayer(src, 'You were kicked for being AFK too long.')
 
     -- Send to Discord
-    local message = ("Player **%s** (ID: %s)\nIdentifiers: %s\nLocation: %s was kicked for being AFK.")
+    local message = ("**Player Kicked for AFK**\n"
+        .. "============================\n"
+        .. "**Name:** %s\n"
+        .. "**ID:** %s\n"
+        .. "**Identifiers:**\n``%s``\n"
+        .. "**Location:** %s\n"
+        .. "============================\n"
+        .. ":no_entry: This player was kicked for being AFK too long.:no_entry:")
         :format(playerName, src, identifierStr, coords)
     sendToDiscord("AntiAFK", message)
 end)

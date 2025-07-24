@@ -50,7 +50,7 @@ AddEventHandler('antiafk:warn', function()
     local countdown = Config.WarningDuration
 
     while countdown > 0 do
-        Notify("You are AFK! Moving in " .. countdown .. " seconds or you will be kicked.")
+        Notify("⚠️ You are AFK! Move within " .. countdown .. " seconds or you will be kicked!⚠️")
         print('[AntiAFK] Warning countdown:', countdown)
         Citizen.Wait(1000)
         countdown = countdown - 1

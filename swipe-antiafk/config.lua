@@ -11,14 +11,16 @@
 Config = {}
 
 -- Max idle time in **minutes**
-Config.MaxAFKMinutes = 40 -- 40 minutes
+-- This is the maximum time a player can be idle before being kicked
+-- Set to 0 to disable the anti-AFK feature
+Config.MaxAFKMinutes = 45 -- 45 minutes
 
 -- Warn player before kick (true/false)
 Config.WarnBeforeKick = true
 
 -- Time before actual kick after warning (in seconds)
 -- This is the duration the player has to respond after being warned
-Config.WarningDuration = 1800 -- 30 minutes
+Config.WarningDuration = 15 -- 15 seconds
 
 
 --  _______  ________ _______  __    __  ______       ________ ________  ______  ________ ______ __    __  ______  
