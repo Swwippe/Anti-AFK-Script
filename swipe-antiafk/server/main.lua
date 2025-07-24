@@ -35,9 +35,28 @@ RegisterServerEvent('antiafk:kick')
 AddEventHandler('antiafk:kick', function()
     local src = source
     local playerName = GetPlayerName(src)
+    -- Get player identifiers
+    local identifiers = {}
+    for i = 0, GetNumPlayerIdentifiers(src) - 1 do
+        table.insert(identifiers, GetPlayerIdentifier(src, i))
+    end
+    local identifierStr = table.concat(identifiers, ', ')
+
+    -- Try to get player location (if using OneSync)
+    local coords = "N/A"
+    if GetEntityCoords then
+        local ped = GetPlayerPed and GetPlayerPed(src)
+        if ped and GetEntityCoords then
+            local pos = GetEntityCoords(ped)
+            coords = ("X: %.2f, Y: %.2f, Z: %.2f"):format(pos.x or 0, pos.y or 0, pos.z or 0)
+        end
+    end
+
     print(('Anti-AFK: Kicking player %s for inactivity'):format(src))
     DropPlayer(src, 'You were kicked for being AFK too long.')
 
     -- Send to Discord
-    sendToDiscord("AntiAFK", ("Player **%s** (ID: %s) was kicked for being AFK."):format(playerName, src))
+    local message = ("Player **%s** (ID: %s)\nIdentifiers: %s\nLocation: %s was kicked for being AFK.")
+        :format(playerName, src, identifierStr, coords)
+    sendToDiscord("AntiAFK", message)
 end)
